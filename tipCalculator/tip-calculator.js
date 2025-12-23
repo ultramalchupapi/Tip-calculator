@@ -1,14 +1,16 @@
 const billPrice = document.getElementById('billPrice');
 const tipPrice = document.getElementById('tipPrice');
 const calculateBtn = document.getElementById('calculateBtn');
+let tipTotal = document.getElementById('tipTotal');
 let billTotal = document.getElementById('billTotal');
 
-
 calculateBtn.addEventListener('click', ()=>{
-    totalPrice = billPrice.value * tipPrice.value/100;
+    let totalTip = billPrice.value * tipPrice.value/100;
+    let totalPrice = Number(totalTip) + Number(billPrice.value);
     
     if(billPrice.value !== '' && tipPrice.value !== ''){
-        billTotal.textContent = `R${totalPrice.toFixed(2)}`;
+        tipTotal.textContent = `+R${totalTip.toFixed(2)}`;
+        billTotal.textContent = `R${totalPrice}`
         billPrice.value = '';
         tipPrice.value = '';
     }else{
@@ -17,15 +19,21 @@ calculateBtn.addEventListener('click', ()=>{
 });
 
 document.addEventListener('keypress', (e) => {
-    totalPrice = billPrice.value * tipPrice.value/100;
+    let totalTip = billPrice.value * tipPrice.value/100;
+    let totalPrice = Number(totalTip) + Number(billPrice.value);
 
     if(e.key === 'Enter'){
+        
         if(billPrice.value !== '' && tipPrice.value !== ''){
-        billTotal.textContent = `R${totalPrice.toFixed(2)}`;
-        billPrice.value = '';
-        tipPrice.value = '';
-    }else{
-        alert('Please enter in values')
-    }
+            tipTotal.textContent = `+R${totalTip.toFixed(2)}`;
+            billTotal.textContent = `R${totalPrice}`
+
+            billPrice.value = '';
+            tipPrice.value = '';
+        }else{
+            alert('Please enter in values')
+        }
     }
 })
+
+
